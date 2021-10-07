@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript">
+
+    // 연산자
+    // = 
+    // : 대입 연산자, 이항 연산자
+    // 우항의 값 1을 좌항의 변수 a에 대입하는 것
+    var a = 1
+
+    // 비교 연산자
+    // 비교 연산자 결과 boolean (true/false)
+
+    // 동등 연산자
+    // ==, equal operator
+    // 서로 값이 같다면 true 다르다면 false
+    console.log(1==2)                     //false
+    console.log(1==1)                     //true
+    console.log("one"=="two")             //false 
+    console.log("one"=="one")              //true
+
+    // ===, strict operator
+    // 좌항과 우항의 값이 일치 & 데이터 형식도 같아야함
+    console.log(1=='1');                  //true
+    console.log(1==='1');                 //false
+
+    // null: 프로그래머가 의도적으로 값이 없음을 명시적으로 표시한 것
+    // undefined:  값이 정의되어 있지 않는 (없는) 상태
+
+    // NaN은 0/0과 같은 연산의 결과로 만들어지는 특수한 데이터 형인데 숫자가 아니라는 뜻
+    console.log(null == undefined);       //true
+    console.log(null === undefined);      //false
+    
+    console.log(true == 1);               //true
+    console.log(true === 1);              //false
+
+    console.log(true == '1');             //true
+    console.log(true === '1');            //false
+    
+    console.log(0 === -0);                //true
+    console.log(NaN === NaN);             //false
+
+    // !=, ==의 반대
+    // !==, ===의 반대
+    console.log("--------!=-----------");
+    console.log(1==2);            //false
+    console.log(1!=2);            //true
+    
+    console.log(1!=1);            //false
+    console.log("one"!="two");    //true
+    console.log("one"!="one");    //false
+
+    // >
+    console.log(10>20);           //false
+    console.log(10>1);            //true
+    console.log(10>10);           //false
+
+    // >=
+    console.log(10>=20);          //false
+    console.log(10>=1);           //true
+    console.log(10>=10);          //true
+
+
+  </script>
+</body>
+</html>

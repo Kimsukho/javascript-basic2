@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    // 전역객체 (Global object)
+    // : 
+    function func(){
+        alert('Hello?');    
+    }
+    func();
+    window.func();
+    // window : 객체, . func : 속성, () : 속성에 담겨진 것은 함수이고, .func() : 메소드라고 한다.
+ 
+    // 모든 전역변수와 함수는 사실 window 객체의 프로퍼티이다.
+
+    // 즉, func() = window.func() 인 셈이다.
+
+  </script>
+</body>
+</html>

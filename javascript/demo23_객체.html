@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    // Object 객체
+    // 객체의 가장 기본적인 형태를 가지고 있는 객체
+    // 아무것도 상속받지 않는 순수한 객체이다.
+    // 자바스크립트에서는 값을 저장하는 기본적인 단위로 Object를 사용함
+
+    // 동시에 자바스크립트의 모든 객체는 Object 객체를 상속 받는데, 그런 이유로 모든 객체는 Object 객체의 프로퍼티를 가지고 있다.
+    var grades = {'egoing': 10, 'k8805': 6, 'sorialgi': 80};
+    console.log(grades);          // Object
+    console.log(typeof(grades));  // object
+
+
+    // Object.keys() 메서드
+    // : 객체(typeof 연산자로 확인했을 때 object가 반환되는)의 프로퍼티들 중에서 key값, 다른 말로 프로퍼티 네임들만 묶어서 배열로 반환하는 메서드
+    // 배열도 객체이기 때문에 활용 가능함, 대상이 되는 배열의 각 인덱스가 담긴 배열이 리턴된다.
+    var arr = ["a", "b", "c"];
+    console.log('Object.keys(arr', Object.keys(arr));   // Object.keys(arr (3) ['0', '1', '2']  Object.keys = function() { }
+
+    var o = {
+      "name" : "egoing", 
+      "age" : 20, 
+      "city" : "seoul"
+    }
+    ;
+    Object.keys(o);   // (3) ['name', 'age', 'city']
+
+    // Object.prototype.toString() 메소드
+    // 어떤 객체가 가지고 있는 값이나 그 객체의 상태를 사람이 보기 편하게 출력해주는 메소드
+    var o = new Object();   // Object.prototype.toString = function() { }
+    console.log('o.toString()', o.toString());  // o.toString() [object Object]
+
+    var a = new Array(1, 2, 3);
+    console.log('a.toString()', a.toString());  // o.toString() [object Object]
+
+    // Object의 같은 메서드이지만 메서드 중 prototype이라고 붙어 있는 것이 있고 없다.
+    // 유 : 식별자.toString(), 어떠한 객체를 만들고 그 객체를 담고 있는 식별자를 선언하면서 쓴다.
+    // 무 : Object.keys(인자), 인자로 어떠한 값을 받아서 처리하게 됨. 
+    // prototype의 소속인 메소드 : 어떤 객체를 만들고 그 객체는 프로토타입이라고 하는 특수한 프로퍼티에 저장되어 있는 원형으로 하는 객체가 생성되는 것
+    
+
+    // 결론
+    // 오브젝트라는 내장 객체는 자바스크립트의 있는 모든 객체들의 공통적인 최초 조상이라는 것.
+    // 오브젝트가 갖고 있는 메소들 중 prototype이 중간에 끼어있는 메소드들은 모든 객체들이 상속받고 있는 공통의 기능이 되는 것
+    // 다른 말로하면, 모든 객체들이 공통적으로 가지고 있어야 되는 기능이 있다면 그 기능은 오브젝트에 prototype 객체를 수정하는 것을 통해 그러한 기능을 만들 수 있다
+  
+    
+    // // Object 객체 확장 -> API 생성 가능
+    Object.prototype.contain = function(needle) { // 메소드안의 this가 가르키는 것 : 메소드가 소속되어 있는 객체를 의미하는 것, contain
+        for (var name in this){
+          if(this[name] === needle){
+            return true;
+          }
+        }
+        return false;
+    }
+
+    var o = {'name':'egoing', 'city':'seoul'}
+    console.log(o.contain('egoing'));             // 객체가 소속되어 있는 것, o
+    var a = ['egoing','leezche','grapittie'];
+    console.log(a.contain('leezche'));            // 객체가 소속되어 있는 것, a
+
+    // Object 확장?
+    // Object 객체는 확장하지 않는 것이 바람직하다. 왜냐하면 모든 객체에 영향을 주기 때문이다. 
+    for(var name in o){
+        console.log(name);  // name, city로만 나와야하는데 name, city, contain으로 객체 메소드의 프로퍼티 contain까지 출력이 된다.
+    }
+
+    for(var name in a){
+        console.log(name);  // 0, 1, 2, contain로 확장한 contain이 포함되어 있으며, 객체가 영향을 받게 되버린 것을 알 수 있다.
+    }
+
+    // Object 확장 프로퍼티 포함 문제 해결 방안 - hasOwnProperty
+    // 프로퍼티의 해당 객체의 소석인지를 체크해볼 수 있는 메소드
+    // 즉, 인자로 전달된 속성의 이름이 객체의 속성인지 판단하는 것. if prototype으로 상속 받는 객체라면 false 출력
+
+    // // Object.prototype.hasOwnProperty() : Object에 프로퍼티이기 때문에 모든 객체가 이 메소드를 가지고 있다.
+    for(var name in o){
+        if(o.hasOwnProperty(name))  // o 라는 객체의 프로퍼티인지를 확인하는 것. contain이 올 시 부모로부터 상속받은 프로퍼티이기 때문에 if문을 벗어나게 된다.
+            console.log(name);      // name, city만 출력이 되고 확장한 contain이 포함되어 있지 않다.
+    }                               // 즉, o라는 객체가 상속받은 프로퍼티와 자기 자신이 직접 정의한 프로퍼티를 분별하는 것
+
+          
+    for(var name in a){
+        if(a.hasOwnProperty(name))
+            console.log(name);  // 0, 1, 2
+    }
+
+
+</script>
+</body>
+</html>

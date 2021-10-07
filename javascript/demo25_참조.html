@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    // 복제     ->  변수에 담겨있는 값이 원시 데이터 타입일때(string, number, boolean, null, undefined)
+    var a = 1;
+    var b = a;
+    b = 2;
+    console.log('복사 a: ', a); // 1
+    // 값을 복제하여 b의 값을 변경해도 a의 값이 변경되지 않는 것을 알 수 있다.
+
+    // 참조 (reference)
+    var a = {'id':1};
+    var b = a;
+    b.id = 2;
+    console.log('참조 a: ', a.id);  // 2
+    console.log('참조 b: ', b.id);  // 2
+    // 변수 b에 담긴 객체의 id 값을 2로 변경했을 뿐인데 a.id의 값도 2가 된 것이다. 
+    // 이것은 변수 b와 변수  a에 담긴 객체가 서로 같다는 것을 의미
+
+    // 함수와 참조
+    // 원시 데이터 타입의 인자
+    var a = 1;
+    function func(b){ // b = a
+        b = 2;
+    }
+    func(a);
+    console.log(a); // 1
+
+    // 참조 데이터 타입의 인자
+    // ①
+    var a = {'id':1};   // 변수에 담겨져 있는 값이 객체임.
+    function func(b){   // b=a
+        b = {'id':2};   // b는 새로운 객체를 할당하여 바라보고 있다.
+                        // 가르키는 객체를 변경하는 것이기 때문에 객체 a에 영향을 주지 않는다..
+    }
+    func(a);
+    console.log(a.id);  // 1
+
+    // ②
+    var a = {'id':1};
+    function func(b){   // b=a
+        b.id = 2;       // b.id = 2를 하게 되면 같은 것을 참조하고 있기 때문에 a.id값도 변경된 효과를 낸다.
+    }
+    func(a);
+    console.log(a.id);  // 2
+  
+  </script>
+</body>
+</html>

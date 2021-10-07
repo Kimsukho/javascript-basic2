@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript">
+
+    // 함수 (function)
+    // : 하나의 로직을 재실행 할 수 있도록 하는 것으로 코드의 재사용성을 높여줌
+    // 장점 : 재사용성, 유지보수 용이, 가독성이 높다
+
+    // 함수 정의
+    // 인자는 함수를 호출할 때 함수의 로직으로 전달될 변수
+    // function 함수명( [인자...[,인자]] ){
+    //   코드
+    //   return 반환값
+    // }
+    
+    function numbering(){
+      i = 0;
+      while(i < 10){
+          document.write(i);
+          i += 1;
+      }   
+    } // 0123456789
+
+    // 함수 호출
+    numbering();
+  
+    // 입력
+    // 인자(argument) : 값 자체 = 함수로 유입되는 입력 값을 의미함
+    // 복수인자 : 여러개의 입력 값을 받고 있는 것
+    // 매개변수(parameter) : 그 값을 받는 변수
+    function get_argument(arg){
+      return arg;
+    }
+    console.log(get_argument(1)); 
+    // 함수 get_argument() 호출 -> 인자를 1 넘기고 get_argument()에서 받은 인자값을 매개변수로 받음으로써 return 1을 반환함.
+    console.log(get_argument(2));
+
+    // 출력, return
+    // : 결과를 반환하는 것 외에 함수를 중지시키는 역할, 출력
+    function get_member1(){
+      return 'egoing';
+    }
+    function get_member2(){
+      return 'k8805';
+    }
+    console.log(get_member1());
+    console.log(get_member2());
+    
+    // 함수를 다르게 정의하는 방법
+    var numbering = function (){
+      i = 0;
+      while(i < 10){
+          document.write(i);
+          i += 1;
+      }   
+    }
+    numbering();
+
+    // 익명 함수
+    // : 이름이 없고 바로 1회성 호출할 시에 사용함.
+    (function (){
+      i = 0;
+      while(i < 10){
+          document.write(i);
+          i += 1;
+      }   
+    })();
+    
+  </script>
+</body>
+</html>

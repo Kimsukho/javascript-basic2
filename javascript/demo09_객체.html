@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Document</title>
+</head>
+
+<ul>
+  <li>egoing</li>
+  <li>k8805</li>
+  <li>sorialgi</li>
+</ul>
+
+<body>
+  <script type="text/javascript">
+
+    // 객체(Object)
+    // : 값을 담는 그릇
+
+    // 변수에 객체 대입
+    var grades = {'egoing': 10, 'k8805': 6, 'sorialgi': 80};
+    // 배열이라는 것과 비슷하지만 객체는 문자로 접근한다.
+    // 즉 배열은 색인으로 접근하였지만 객체는 key, value로 접근한다.
+
+    var arr = ['a', 'b', 'c'];
+
+    console.log(arr);
+    for (var i = 0; i < arr.length; i++){
+      console.log(arr[i]);
+    }
+
+    // 배열 for 문 -> for - in 문
+    var grades = {'egoing': 10, 'k8805': 6, 'sorialgi': 80};
+
+    // for(key in grades) {  // for (key in 객체)
+    //     document.write("key : "+key+" valeu : "+grades[key]+"<br />");
+    // }
+    for(var name in grades) {  // for (key in 객체)
+        document.write("<li>key : "+ name +", value : "+grades[name]+"</li>");
+    }
+    /* 
+    출력 결과
+    객체에 있는 이름들이 key 값으로 되어 있는 것을 확인 할 수 있음.
+    key : egoing, value : 10
+    key : k8805, value : 6
+    key : sorialgi, value : 80
+    */
+
+    var grades = {
+      'list': {'egoing': 10, 'k8805': 6, 'sorialgi': 80}, // list라는 키의 값은 {'egoing': 10, 'k8805': 6, 'sorialgi': 80}이다.
+      'show' : function(){
+        // console.log('Hello world');
+        console.log(this.list); 
+        // this가 가리키는 grades에 있는 list키의 값 출력 : {egoing: 10, k8805: 6, sorialgi: 80}
+        // console.log(this) this : function()이 속해있는 객체를 가리키는 변수임. 즉, grades를 가리킴
+      }
+    };
+    console.log(grades['list']);            // {egoing: 10, k8805: 6, sorialgi: 80}
+    console.log(grades['list']['egoing']);  // egoing이 가리키고 있는 10을 출력함.
+
+    // grades객체에 있는 show키로 저장되어있는 함수를 호출할때 사용.
+    //  grades['show'](); 
+
+
+    var grades = {
+      'list': {'egoing': 10, 'k8805': 6, 'sorialgi': 80},
+      'show' : function(){
+        for(var name in this.list){
+            document.write(name + ':' + this.list[name]+"<br />");
+        }
+      }
+    };
+
+    grades.show(); // = grades['show']();
+
+
+  </script>
+</body>
+</html>

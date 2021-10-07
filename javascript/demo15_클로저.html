@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    // 클로저 (closure)
+    // 내부함수가 외부함수의 맥락(context)에 접근할 수 있는 것
+
+    // 내부함수
+    // 함수 outter의 내부에는 함수 inner가 정의, 함수 inner를 내부 함수라고 함
+    function outter(){
+        function inner(){                   // var inner = function(){ }로 outter함수 안에 inner라는 지역변수를 만들어
+            var title = 'coding everybody'; // inner변수에 함수를 할당한 것
+            console.log(title);
+        }
+        inner();
+    }
+    outter();
+
+    // 내부함수는 외부함수의 지역변수에 접근 가능
+    function outter(){
+        var title = 'coding everybody';  
+        function inner(){        
+            console.log(title);
+        }
+        inner();
+    }
+    outter();
+
+    // private variable
+    // 어떠한 정보를 아무나 수정하도록 하는 것을 방지하는 것
+    function factory_movie(title){
+        return {                      // return 은 {}인 객체를 리턴하고, 객체의 속성이 2개가 존재한다.
+            get_title : function (){  // 속성에 함수가 정의가 되어있는 것을 메소드라고 한다.
+                return title;         // 그러므로 return에는 객체안에 두개의 메소드가 정의되어 있는 속성을 가짐.
+            },                        // 내부 함수는 외부함수의 지역변수에 접근이 가능하다는 점 이를 통해 알 수 있음.
+            set_title : function(_title){
+              if(typeof _title === 'String'){ // _title String 인지 확인하고 title 값 세팅하기.
+                 title = _title;
+              } else {
+                alert("제목은 문자열이어야 합니다.");
+              }
+            }
+        } // 객체 안에 두 개의 함수(메소드)가 정이되어 있으며 내부함수라고 한다.
+    }
+    ghost = factory_movie('Ghost in the shell');
+    matrix = factory_movie('Matrix');
+    
+    console.log(ghost.get_title());   // Ghost in the shell
+    console.log(matrix.get_title());  // Matrix
+    // 즉. ghost, matrix는 똑같은 객체이지만 그 객체가 가지고 있는 get_title 메소드가 접근하는 외부 함수의 지역변수의 title값이 서로 다르다.
+    
+    ghost.set_title('공각기동대');    // set_title 메소드를 호출하여 _title = "공각기동대"로 변경되며, title 값이 공각기동대가 된다.
+                                      // set_title title = _title이 공각기동대로 변경되면서 factory_movie의 지역 변수를 바꾸게 된다.
+    ghost.set_title(1);
+    console.log(ghost.get_title());   // 공각기동대
+    console.log(matrix.get_title());  // Matrix
+
+    /*
+    factory_movie의 지역변수 title은 2행에서 정의된 객체의 메소드에서만 접근 할 수 있는 값이다. 
+    이 말은 title의 값을 읽고 수정 할 수 있는 것은 factory_movie 메소드를 통해서 만들어진 객체 뿐이라는 의미다. 
+    JavaScript는 기본적으로 Private한 속성을 지원하지 않는데, 클로저의 이러한 특성을 이용해서 Private한 속성을 사용할 수 있게된다.
+
+    
+    * 참고 
+    Private 속성은 객체의 외부에서는 접근 할 수 없는 외부에 감춰진 속성이나 메소드를 의미
+    */
+
+
+    // 클로저의 응용
+    var arr = []
+    for(var i = 0; i < 5; i++){
+        arr[i] = function(){
+            return i;
+        }
+    }
+    for(var index in arr) {
+        console.log(arr[index]());  // 5가 5번 출력됨.
+    }
+
+    // 외부 함수를 정의하고 외부 함수의 지역 변수의 값을 내부 함수가 참조할 수 있도록 만든다. 
+    var arr = []
+    for(var i = 0; i < 5; i++){
+        arr[i] = function(id) { // 외부 함수, 지역 변수 id(매개변수 )
+            return function(){  // 내부 함수
+                return id;      // 내부 함수가 외부 함수의 지역 변수 id를 접근하여 리턴함.
+            }                   // 외부 함수가 호출 -> 내부 함수는 외부 함수 지역 변수 id를 return -> return된 값을 배열에 저장
+        }(i); // 외부 함수를 즉석으로 호출함으로서 내부 함수를 리턴해줌, 이때 외부함수의 매개변수의 인자 값을 i로 줌 -> 
+    }// 즉 for문 실행될 때마다 id라는 매개변수의 값으로 i 값을 받아와 함수 내부로 전달 -> 전달 동시에 리턴 -> 내부 함수를 리턴(외부 함수의 지역 변수인 id return) 
+    for(var index in arr) {
+        console.log(arr[index]());
+    }
+
+
+  </script>
+</body>
+</html>

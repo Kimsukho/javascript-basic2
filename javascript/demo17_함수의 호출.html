@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    // 함수 호출
+
+    // 가장 기본적인 함수 호출 방법
+    function func(){
+    }
+    func();
+    // 함수 func는 Function이라는 객체의 인스턴스.
+    // 따라서 func는 객체 Function이 가지고 있는 메소드들을 상속하고 있어 사용 가능함
+    // ex) Function.apply, Function.call
+
+    // 함수 = 객체
+    // 객체는 속성들을 가지고 있음, 속성에 값이 저장되어 있다면 속성(property)이라고 하고 
+    // 속성에 함수가 들어있으면 그것을 메소드라고 한다.
+
+    function sum(arg1, arg2){
+        return arg1+arg2;
+    }
+    alert(sum.apply(null, [1,2]))
+    // 함수 sum은 Function 객체의 인스턴스
+    // 객레 Fucntion의 메소드 apply 호출 가능함.
+    
+    o1 = {val1:1, val2:2, val3:3}
+    o2 = {v1:10, v2:50, v3:100, v4:25}
+    function sum(){
+        var _sum = 0;
+        // var this = o1;
+        // var this = o2;
+        for(name in this){      // for-in this라는 객체에 담겨있는 값들을 하나씩 꺼내어 sum 지역변수에 더하여 return해주고 있다.
+            _sum += this[name]; // this : 
+        }                       
+        return _sum;
+    }
+    alert(sum.apply(o1)) // 6
+    alert(sum.apply(o2)) // 185
+
+  </script>
+</body>
+</html>

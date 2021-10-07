@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    // 함수와 this
+    // this
+    // : 함수 내에서 함수 호출 맥락(context)를 의미함
+    // 전역객체인 window와 같다.
+
+    // 함수호출
+    function func(){
+        if(window === this){
+            document.write("window === this");
+        }
+    }
+    func(); 
+
+    // 메소드의 호출
+    var o = {
+        func : function(){
+            if(o === this){
+                document.write("o === this");
+            }
+        }
+    }
+    // o라는 변수에 객체를 정의함
+    // 객체에는 func라는 property가 있고, property는 함수이기 때문에 메소드다.
+    o.func(); 
+
+    // 생성자의 호출
+    var funcThis = null; 
+ 
+    function Func(){
+        funcThis = this;
+        // this의 값이 funcThis라고 하는 변수에 할당이 되는 것
+        // funcThis 변수 앞에 var 이 없기 때문에 전역변수를 가리키게 됨. 
+    }
+    var o1 = Func();      // 일반 함수 호출
+    if(funcThis === window){
+        document.write('window <br />');
+    } // 윈도우라는 객체의 메소드이기 때문에 위에 명령어가 출력됨.
+    
+    var o2 = new Func();  // new로 생성자 함수 호출
+    if(funcThis === o2){
+        document.write('o2 <br />');
+    }
+
+    // 즉, 똑같은 함수의 Func() 이지만 생성자의 사용 여부에 따라 this의 값이 달라진다
+    // 생성자로 호출 : this의 값이 생성될 객체를 가리킴
+    // 일반함수로 호출 : this의 값이 window값으로 됨.
+
+
+    // 함수 메소드 : apply, call
+    // -> 이용하여 this의 값을 제어 가능함.
+    var o = {}
+    var p = {}
+    function func(){
+        switch(this){
+            case o:
+                document.write('o<br />');
+                break;
+            case p:
+                document.write('p<br />');
+                break;
+            case window:
+                document.write('window<br />');
+                break;          
+        }
+    }
+    func();
+    func.apply(o);
+    func.apply(p);
+
+    // 리터럴
+    // : 편리하게 우리가 어떤 값을 만들 수 있도록 해주는 그런 문법적인 체계
+
+    // 함수 리터럴, 객체 리터럴(new Object), 배열 리터럴(new Array)
+
+    // 객체는 객체의 프로퍼티를 가질 수 있다.
+
+    // apply와 this
+    var o = {}
+    var p = {}
+    function func(){
+        switch(this){
+            case o:
+                document.write('o<br />');
+                break;
+            case p:
+                document.write('p<br />');
+                break;
+            case window:
+                document.write('window<br />');
+                break;          
+        }
+    }
+    func();         // 함수로서 호출 -> switch(this = window)로 case window:문을 실행
+    func.apply(o);  // func() 객체이기때문에 property를 가지고 있고 표준 메소드인 apply를 가지고 있다.
+    func.apply(p);
+
+
+  </script>
+</body>
+</html>

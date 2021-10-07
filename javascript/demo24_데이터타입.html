@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    // 데이터 타입
+    // : 데이터의 형태를 의미함
+
+    // ① 원시 데이터 타입 (primitive type)
+    // : 객체가 아닌 데이터 타입
+    // number, string, boolean(true/false), null, undefiend
+
+    // ② 객체 (참조) 데이터 타입
+
+    // 레퍼객체
+    // : 이름처럼 원시 타입의 값을 감싸는 형태의 객체
+    //  number, string, boolean
+
+    /*
+    예시 )
+    var arr = [1,2,3,4,5];
+    console.log(arr.length); // 5
+    arr.length
+    . : 프로퍼티 참조 연산자
+    . 앞에는 객체를 가리키는 식별자
+    . 뒤에는 프로퍼티 이름이 나와야함.
+
+    var str = 'abcde';
+    console.log(str.length);
+    . 앞에 객체를 가리키는 식별자가 와야하는데 원시 데이터 타입인 문자열 str이 오는 것이 말이 안된다.
+
+    원시타입인 문자열의 프로퍼티에 접근하려고 할 때 new String을 호출한 것처럼 문자열 값을 객체로 변환한다.
+    이 객체를 래퍼 객체라고 한다. 래퍼 객체는 프로퍼티를 참조할 때 생성되며 프로퍼티 참조가 끝나면 사라진다.
+
+ 
+    var str = 'abcde';
+    str.len = 5;          // new String(str).len = 5
+
+    console.log(str.len); // undefined
+    
+    변수의 프로퍼티에 접근할 때 래퍼 객체가 임시로 생성된다.
+    프로퍼티의 값을 할당하는 것은 임시로 생성된 래퍼 객체에서 수행되며 지속되지 않는다.
+    이 때문에 원시 타입의 프로퍼티가 마치 읽기 전용 값처럼 존재하는 것
+   */
+
+
+   // -> 문자열, 숫자, 불리언은 객체처럼 사용이 가능하지만 원시 데이터 타입이라는 것을 알아야 한다.
+   // 원시 데이터 타입인데 객체처럼 사용이 가능한 이유는 래퍼객체로 감싸져 있기 때문이다.
+
+  </script>
+</body>
+</html>
